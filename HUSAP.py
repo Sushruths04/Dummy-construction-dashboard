@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # Load the dataset
-file_path = 'D:\HIWI\Filtered.xlsx'
+file_path = './Filtered.xlsx'
 data = pd.read_excel(file_path)
 
 # Preprocess data
