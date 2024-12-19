@@ -45,11 +45,14 @@ years = st.sidebar.multiselect(
 
 bauteil = st.sidebar.multiselect("Select Bauteil", options=data['Bauteil'].unique(), default=data['Bauteil'].unique())
 
+konstruktion = st.sidebar.multiselect("Select Konstruktion", options=data['Konstruktion'].unique(), default=data['Konstruktion'].unique())
+
+
 # Filtered Data
 filtered_data = data[(data['Region'].isin(regions)) & 
                      (data['Baualtersklasse'].isin(years)) & 
-                     (data['Bauteil'].isin(bauteil))]
-
+                     (data['Bauteil'].isin(bauteil)) &
+                     (data['Konstruktion'].isin(konstruktion))]
 
 # Display Metrics
 st.subheader("Average Metrics")
