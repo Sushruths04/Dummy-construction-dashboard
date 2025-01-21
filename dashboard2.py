@@ -5,7 +5,7 @@ import plotly.express as px
 # Load and clean the dataset
 @st.cache
 def load_data():
-    file_path = "updated_baualtersklasse.xlsx"  # Updated file path
+    file_path = "updated_baualtersklasses.xlsx"  # Updated
     df = pd.read_excel(file_path)
     df['Stärke [cm]'] = df['Stärke [cm]'].replace(',', '.', regex=True)
     df['λ-Wert [W/(mK)]'] = df['λ-Wert [W/(mK)]'].replace(',', '.', regex=True)
