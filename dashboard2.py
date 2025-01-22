@@ -90,7 +90,7 @@ top_10_avg_materials = (
     filtered_data.groupby('Material')
     .agg(Average_Thickness=('Stärke [cm]', 'mean'), Average_Lambda=('λ-Wert [W/(mK)]', 'mean'))
     .sort_values(by='Average_Thickness', ascending=False)
-    .head(20)
+    .head(50)
     .reset_index()
 )
 st.write(top_10_avg_materials)
