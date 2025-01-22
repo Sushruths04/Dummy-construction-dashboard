@@ -67,8 +67,8 @@ material_counts = filtered_data['Material'].value_counts().reset_index()
 material_counts.columns = ['Material', 'Count']
 
 # Group "Others"
-top_materials = material_counts[:30]
-others = material_counts[30:]
+top_materials = material_counts[:10]
+others = material_counts[10:]
 top_materials.loc[len(top_materials)] = ['Others', others['Count'].sum()]
 
 fig_pie = px.pie(top_materials, names='Material', values='Count', title="Material Distribution")
@@ -90,7 +90,7 @@ top_10_avg_materials = (
     filtered_data.groupby('Material')
     .agg(Average_Thickness=('Stärke [cm]', 'mean'), Average_Lambda=('λ-Wert [W/(mK)]', 'mean'))
     .sort_values(by='Average_Thickness', ascending=False)
-    .head(10)
+    .head(20)
     .reset_index()
 )
 st.write(top_10_avg_materials)
