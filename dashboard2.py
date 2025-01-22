@@ -88,11 +88,19 @@ if st.button("Show Details for Others"):
 st.subheader("Top 10 Materials by Average Thickness and Lambda Value")
 top_10_avg_materials = (
     filtered_data.groupby('Material')
-    .agg(Average_Thickness=('Stärke [cm]', 'mean'), Average_Lambda=('λ-Wert [W/(mK)]', 'mean'))
+    .agg(
+        Average_Thickness=('Stärke [cm]', 'mean'),
+        Average_Lambda=('λ-Wert [W/(mK)]', 'mean'),
+        Count=('Material', 'size')  # Count the number of records for each material
+    )
     .sort_values(by='Average_Thickness', ascending=False)
     .head(50)
     .reset_index()
 )
+
+# Calculate the percentage for each material based on the total count
+top_10_avg_materials['Percentage'] = (top_10_avg_materials['Count'] / top_10_avg_materials['Count'].sum()) * 100
+
 st.write(top_10_avg_materials)
 
 # Trends: Thickness and Lambda Over Time
