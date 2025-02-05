@@ -8,18 +8,20 @@ def calculate_thickness(base_thickness, q_value, Q_value):
     return round(adjusted_thickness, 2)
 
 # Streamlit UI
+st.set_page_config(layout="wide")
 st.title("Building Thickness Calculator")
 
-# User inputs all data in one section
-st.header("Input Parameters")
-residential_thickness = st.number_input("Enter Residential Base Thickness (t) in cm", min_value=5.0, max_value=50.0, value=15.0, step=0.5)
+# Layout in columns to fit everything on a single screen
+col1, col2 = st.columns([1, 1])
 
-building_types = ["Offices", "Education", "Culture", "Trade", "Healthcare", "Hospitality", "Industry"]
-q_values = {building: st.number_input(f"Enter Q Value for {building}", min_value=2, max_value=10, value=4, step=1) for building in building_types}
+with col1:
+    st.header("Input Parameters")
+    residential_thickness = st.number_input("Enter Residential Base Thickness (t) in cm", min_value=5.0, max_value=50.0, value=15.0, step=0.5)
 
-# Calculate thickness for each building type
-results = {building: calculate_thickness(residential_thickness, 2, Q_value) for building, Q_value in q_values.items()}
+    building_types = ["Offices", "Education", "Culture", "Trade", "Healthcare", "Hospitality", "Industry"]
+    q_values = {building: st.number_input(f"Enter Q Value for {building}", min_value=2, max_value=10, value=4, step=1) for building in building_types}
 
-# Display results in a single view
-st.header("Results")
-st.write(pd.DataFrame(results.items(), columns=["Building Type", "Calculated Thickness (cm)"]))
+with col2:
+    st.header("Results")
+    results = {building: calculate_thickness(residential_thickness, 2, Q_value) for building, Q_value in q_values.items()}
+    st.write(pd.DataFrame(results.items(), columns=["Building Type", "Calculated Thickness (cm)"]))
